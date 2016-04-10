@@ -1,8 +1,8 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2013.9.25)  9 APR 2016 18:59
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2013.9.25)  9 APR 2016 19:34
 entering extended mode
  %&-line parsing enabled.
-**week1.tex
-(./week1.tex
+**week2.tex
+(./week2.tex
 LaTeX2e <2005/12/01>
 Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
 yphenation, arabic, basque, bulgarian, coptic, welsh, czech, slovak, german, ng
@@ -333,8 +333,8 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 38.
 LaTeX Warning: Unused global option(s):
     [journal].
 
-(./week1.aux)
-\openout1 = `week1.aux'.
+No file week2.aux.
+\openout1 = `week2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
 LaTeX Font Info:    ... okay on input line 40.
@@ -390,7 +390,7 @@ driver: pdftex
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
 Package hyperref Info: Link coloring ON on input line 40.
- (/usr/share/texmf/tex/latex/hyperref/nameref.sty
+(/usr/share/texmf/tex/latex/hyperref/nameref.sty
 Package: nameref 2006/12/27 v2.28 Cross-referencing by name of section
 
 (/usr/share/texmf/tex/latex/oberdiek/refcount.sty
@@ -400,11 +400,11 @@ Package: refcount 2006/02/20 v3.0 Data extraction from references (HO)
 )
 LaTeX Info: Redefining \ref on input line 40.
 LaTeX Info: Redefining \pageref on input line 40.
- (./week1.out) (./week1.out)
 \@outlinefile=\write4
-\openout4 = `week1.out'.
+\openout4 = `week2.out'.
 
 LaTeX Font Info:    Try loading font information for U+msa on input line 47.
+
 (/usr/share/texmf/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2002/01/19 v2.2g AMS font definitions
 )
@@ -418,10 +418,10 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-(./week1.aux) ) 
+(./week2.aux) ) 
 Here is how much of TeX's memory you used:
- 6265 strings out of 256216
- 79811 string characters out of 1917072
+ 6259 strings out of 256216
+ 79751 string characters out of 1917072
  165230 words of memory out of 1500000
  9467 multiletter control sequences out of 10000+200000
  8593 words of font info for 33 fonts, out of 1200000 for 2000
@@ -430,7 +430,7 @@ Here is how much of TeX's memory you used:
 </usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/t
 exmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/
 cmr17.pfb>
-Output written on week1.pdf (1 page, 20766 bytes).
+Output written on week2.pdf (1 page, 20595 bytes).
 PDF statistics:
  27 PDF objects out of 1000 (max. 8388607)
  2 named destinations out of 1000 (max. 131072)
