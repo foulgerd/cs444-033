@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2013.9.25)  9 APR 2016 18:59
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2013.9.25)  9 APR 2016 20:56
 entering extended mode
  %&-line parsing enabled.
 **week1.tex
@@ -430,7 +430,7 @@ Here is how much of TeX's memory you used:
 </usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/t
 exmf/fonts/type1/bluesky/cm/cmr12.pfb></usr/share/texmf/fonts/type1/bluesky/cm/
 cmr17.pfb>
-Output written on week1.pdf (1 page, 20766 bytes).
+Output written on week1.pdf (1 page, 20770 bytes).
 PDF statistics:
  27 PDF objects out of 1000 (max. 8388607)
  2 named destinations out of 1000 (max. 131072)
