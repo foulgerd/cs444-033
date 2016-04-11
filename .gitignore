@@ -1,0 +1,7 @@
+#Files and folders to ignore
+
+/linux-yocto-3.14/
+/sourceme
+/core-image-lsb-sdk-qem
+/bzImage-qemux86.bin
+/summaries/IEEEtran/
