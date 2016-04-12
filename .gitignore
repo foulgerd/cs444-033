@@ -2,6 +2,6 @@
 
 /linux-yocto-3.14/
 /sourceme
-/core-image-lsb-sdk-qem
+/core-image-lsb-sdk-qemus86.ext3
 /bzImage-qemux86.bin
 /summaries/IEEEtran/
