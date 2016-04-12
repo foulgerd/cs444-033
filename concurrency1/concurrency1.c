@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
+#include<time.h>
 
 #define BUFFER_MAX 32
 
@@ -17,6 +18,7 @@ struct Buffer buffer[BUFFER_MAX];
 
 int randomNumbers(int pc){
         int random;
+        srand(time(NULL));
         switch(pc) { 
                 case 1:                 //Producer random number
                         random = (rand() % 10);
@@ -51,6 +53,7 @@ void produce(){
                         if (checkFinished(i)) {
                                 buffer[i].number = randomNumbers(1);
                                 buffer[i].wait = randomNumbers(3);
+                                printf("Producing number: %d\n", buffer[i].number);
                                 sleep(buffer[i].wait);
                                 i++;
                         }
@@ -67,7 +70,7 @@ void consume(){
         while(i != 32) {
                 //for (i = 0; i < BUFFER_MAX; i++) {
                         if (!checkFinished(i)) {
-                                printf("Printing number: %d\n", buffer[i].number);
+                                printf("Consuming number: %d\n", buffer[i].number);
                                 buffer[i].wait = randomNumbers(2);
                                 sleep(buffer[i].wait);
                                 buffer[i].number = 33;
