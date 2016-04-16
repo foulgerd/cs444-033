@@ -1,8 +1,18 @@
 #Files and folders to ignore
 
+#FOLDERS
 /linux-yocto-3.14/
+/sourceme
+/summaries/IEEEtran/
+/homework1/
+/latex-git-log
+/CS444_project1_033
+
+#FILES
+*.out
+*.log
+*.aux
 /sourceme
 /core-image-lsb-sdk-qemux86.ext3
 /bzImage-qemux86.bin
-/summaries/IEEEtran/
-/homework1/
+
