@@ -24,8 +24,9 @@ int think() {
 
 void dinner(int i) {
         while(1) {
+                //pthread_mutex_lock(&fork_wall);
                 if (forks[i] == 0 || forks[(i+1) % PHILOSOPHERS] == 0) {
-                        pthread_mutex_trylock(&fork_wall);
+                        pthread_mutex_lock(&fork_wall);
                         forks[i] = 1;                       //left fork
                         forks[(i+1) % PHILOSOPHERS] = 1;    //right fork
                         printf("Philosopher #%d is eating.\n", i);
