@@ -7,7 +7,10 @@
 
 #define PHILOSOPHERS 5
 
+//These are the real forks
 pthread_mutex_t fork_wall[PHILOSOPHERS];
+
+//These are the forks used for race conditions
 int forks[PHILOSOPHERS];
 
 int eat() {
@@ -22,44 +25,50 @@ int think() {
         sleep(wait);
 }
 
-void dinner(int i) {
+void dinner(void *j) {
+        int i = (intptr_t) j;
+
         while(1) {
-                //pthread_mutex_lock(&fork_wall);
                 //Get forks if possible
                 if (forks[i] == 0 || forks[(i+1) % PHILOSOPHERS] == 0) {
                         pthread_mutex_lock(&fork_wall[i]);
                         pthread_mutex_lock(&fork_wall[(i+1) % PHILOSOPHERS]);
+                        
                         forks[i] = 1;                       //left fork
                         forks[(i+1) % PHILOSOPHERS] = 1;    //right fork
                         printf("Philosopher #%d is eating with forks #%d and #%d.\n", i, i, ((i+1) % PHILOSOPHERS));
                         eat();
+                        
                         pthread_mutex_unlock(&fork_wall[i]);
                         pthread_mutex_unlock(&fork_wall[(i+1) % PHILOSOPHERS]);
                 }
 
-                //Put down forks
-                pthread_mutex_lock(&fork_wall[i]);
-                pthread_mutex_lock(&fork_wall[(i+1) % PHILOSOPHERS]);
-                forks[i] = 0;
-                forks[(i+1) % PHILOSOPHERS] = 0;
-                pthread_mutex_unlock(&fork_wall[i]);
-                pthread_mutex_unlock(&fork_wall[(i+1) % PHILOSOPHERS]);
-                printf("Philosopher #%d is thinking.\n", i);
-                think();
+                //Put down forks if they are taken
+                if (forks[i] == 1 || forks[(i+1) % PHILOSOPHERS] == 1) {
+                        pthread_mutex_lock(&fork_wall[i]);
+                        pthread_mutex_lock(&fork_wall[(i+1) % PHILOSOPHERS]);
+                        
+                        forks[i] = 0;                           //put down left fork
+                        forks[(i+1) % PHILOSOPHERS] = 0;        //put down right fork
+                        
+                        pthread_mutex_unlock(&fork_wall[i]);
+                        pthread_mutex_unlock(&fork_wall[(i+1) % PHILOSOPHERS]);
+                        printf("Philosopher #%d is thinking.\n", i);
+                        think();
+                }
         }
 }
 
 int main() {
         pthread_t philosophers[PHILOSOPHERS];
         int i = 0;
-        char name_temp[6];
         srand(time(NULL));
 
+        //Initializing the forks as not taken
         for (i = 0; i < PHILOSOPHERS; i++) {
                 forks[i] = 0;
         }
 
-        //init the fork mutex
         for (i = 0; i < PHILOSOPHERS; i++) {
                 if (pthread_mutex_init(&fork_wall[i], NULL)) {
                         printf("Error initializing mutex.\n");
@@ -68,7 +77,7 @@ int main() {
         }
 
         for (i = 0; i < PHILOSOPHERS; i++) {
-                pthread_create(&philosophers[i], NULL, (void *)dinner, (void *) i);
+                pthread_create(&philosophers[i], NULL, (void *)dinner, (void *) (intptr_t) i);
         }
 
         for (i = 0; i < PHILOSOPHERS; i++) {
@@ -80,6 +89,3 @@ int main() {
 
         return 0;
 }
-
-
-
