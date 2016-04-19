@@ -7,7 +7,7 @@
 
 #define PHILOSOPHERS 5
 
-pthread_mutex_t fork_wall;
+pthread_mutex_t fork_wall[PHILOSOPHERS];
 int forks[PHILOSOPHERS];
 
 int eat() {
@@ -25,19 +25,25 @@ int think() {
 void dinner(int i) {
         while(1) {
                 //pthread_mutex_lock(&fork_wall);
+                //Get forks if possible
                 if (forks[i] == 0 || forks[(i+1) % PHILOSOPHERS] == 0) {
-                        pthread_mutex_lock(&fork_wall);
+                        pthread_mutex_lock(&fork_wall[i]);
+                        pthread_mutex_lock(&fork_wall[(i+1) % PHILOSOPHERS]);
                         forks[i] = 1;                       //left fork
                         forks[(i+1) % PHILOSOPHERS] = 1;    //right fork
-                        printf("Philosopher #%d is eating.\n", i);
+                        printf("Philosopher #%d is eating with forks #%d and #%d.\n", i, i, ((i+1) % PHILOSOPHERS));
                         eat();
-                        pthread_mutex_unlock(&fork_wall);
+                        pthread_mutex_unlock(&fork_wall[i]);
+                        pthread_mutex_unlock(&fork_wall[(i+1) % PHILOSOPHERS]);
                 }
 
-                pthread_mutex_lock(&fork_wall);
+                //Put down forks
+                pthread_mutex_lock(&fork_wall[i]);
+                pthread_mutex_lock(&fork_wall[(i+1) % PHILOSOPHERS]);
                 forks[i] = 0;
                 forks[(i+1) % PHILOSOPHERS] = 0;
-                pthread_mutex_unlock(&fork_wall);
+                pthread_mutex_unlock(&fork_wall[i]);
+                pthread_mutex_unlock(&fork_wall[(i+1) % PHILOSOPHERS]);
                 printf("Philosopher #%d is thinking.\n", i);
                 think();
         }
@@ -45,7 +51,7 @@ void dinner(int i) {
 
 int main() {
         pthread_t philosophers[PHILOSOPHERS];
-        int i;
+        int i = 0;
         char name_temp[6];
         srand(time(NULL));
 
@@ -54,10 +60,12 @@ int main() {
         }
 
         //init the fork mutex
-        if (pthread_mutex_init(&fork_wall, NULL)) {
-                printf("Error initializing mutex.\n");
-                exit(0);
-        } 
+        for (i = 0; i < PHILOSOPHERS; i++) {
+                if (pthread_mutex_init(&fork_wall[i], NULL)) {
+                        printf("Error initializing mutex.\n");
+                        exit(0);
+                }
+        }
 
         for (i = 0; i < PHILOSOPHERS; i++) {
                 pthread_create(&philosophers[i], NULL, (void *)dinner, (void *) i);
@@ -67,7 +75,7 @@ int main() {
                 pthread_join(philosophers[i], NULL);
         }
 
-        pthread_mutex_destroy(&fork_wall);
+        pthread_mutex_destroy(&fork_wall[i]);
         pthread_exit(0);
 
         return 0;
